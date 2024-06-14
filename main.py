@@ -1,11 +1,10 @@
-import json
 import api_request
 import pandas as pd
 import plotly.express as px
 import asyncio
 from constant_data import congest_lvl_mapping, area_polygons
 
-
+# Convert API response to geojson formmat for plotting
 def create_geojson(area_polygons):
     features = []
     for area_name, coordinates in area_polygons.items():
@@ -85,7 +84,7 @@ async def update_plot():
             df = prepare_data_for_choropleth(filtered_data, location_name)
             combined_df = pd.concat([combined_df, df])
     
-    print("Combined DataFrame for heatmap:\n", combined_df)  # Debug print to inspect combined DataFrame content
+    print("시각화 위한 통합 데이터프레임 출력:\n", combined_df)  # Debug print to inspect combined DataFrame content
     if not combined_df.empty:
         geojson = create_geojson(area_polygons)
         fig = plot_choropleth(combined_df, geojson)

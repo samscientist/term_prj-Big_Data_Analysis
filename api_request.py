@@ -18,7 +18,7 @@ async def fetch_data(area='광화문·덕수궁'):
     except ValueError:
         print("Response content is not valid JSON")
     else:
-        with open('data.json', 'w', encoding='utf-8') as f:
+        with open('data_cache.json', 'w', encoding='utf-8') as f:
             json.dump(response_json, f, ensure_ascii=False, indent=4)
         return response_json
     
